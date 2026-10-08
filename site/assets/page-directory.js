@@ -21,6 +21,10 @@ export function addressOf(path, prefix) {
 /** The section a page is listed under: the first segment of its address, or "" for a page at the top level. */
 export function sectionOf(address) {
   const segments = String(address).split("/").filter(Boolean);
+  if (segments[0] === 'docs') {
+    const names = { guides: 'Guides', reference: 'Reference', maintainers: 'Maintainers', architecture: 'Architecture', migration: 'Migration', agents: 'Agents', integration: 'Integration', posts: 'Posts' };
+    return names[segments[1]] || 'Documentation';
+  }
   return segments.length > 1 ? segments[0] : "";
 }
 
@@ -28,7 +32,11 @@ export function sectionOf(address) {
 export function labelOf(page) {
   const h1 = ((page.body && page.body.headings) || []).find((h) => h.level === 1 && h.text);
   const title = page.head && page.head.title;
-  return (h1 && h1.text) || title || page.path;
+  if (h1 && h1.text) return h1.text;
+  const cleanTitle = title?.replace(/\s*·\s*AKM docs\s*$/, '').trim();
+  if (cleanTitle) return cleanTitle;
+  return decodeURIComponent(page.path.split('/').filter(Boolean).pop() || 'Documentation')
+    .replace(/\.html$/, '').replaceAll('-', ' ');
 }
 
 /** One {path, address, label, section} per page in the catalog. Throws when the file is not a catalog. */
@@ -43,7 +51,7 @@ export function entriesOf(catalog) {
 
 /** Entries whose title or address contains every word of the query (case-insensitive). */
 export function filterEntries(entries, query) {
-  const words = String(query).toLowerCase().split(" ").filter(Boolean);
+  const words = String(query).toLowerCase().split(/\s+/).filter(Boolean);
   if (words.length === 0) return entries;
   return entries.filter((entry) => {
     const haystack = (entry.label + " " + entry.address).toLowerCase();

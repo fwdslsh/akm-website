@@ -8,14 +8,15 @@
     <meta property="og:description" content="Every page on the site in one searchable list, grouped by section.">
     <style>
       .all-pages-search label { display: block; font-weight: bold; }
-      .all-pages-search input { box-sizing: border-box; width: 100%; max-width: 24rem; padding: 0.4rem; font: inherit; }
+      .all-pages-search input { box-sizing: border-box; width: 100%; max-width: 24rem; padding: 0.65rem; font: inherit; color: var(--text); background: var(--bg-card); border: 1px solid var(--border); border-radius: .4rem; }
+      .all-pages-search input:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
       .all-pages-count { min-height: 1.5em; }
       .all-pages-list h2 { margin-bottom: 0.25rem; text-transform: none; }
       .all-pages-list ul { margin-top: 0; padding-left: 1.25rem; }
       .all-pages-error { border: 2px solid; border-radius: 0.25rem; padding: 0.5rem 1rem; }
     </style>
     <link rel="preload" href="/assets/unify/catalog.json" as="fetch" crossorigin>
-    <script type="module" src="/assets/all-pages.js"></script>
+    <script type="module" src="/assets/page-directory.js"></script>
   </head>
   <body>
     <main>
