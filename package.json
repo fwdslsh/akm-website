@@ -1,0 +1,11 @@
+{
+  "name": "akm-website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "import:docs": "bun scripts/import-docs.mjs",
+    "build": "bun run import:docs && unify build --clean",
+    "dev": "unify dev"
+  },
+  "dependencies": { "@fwdslsh/unify": "0.11.7" }
+}
