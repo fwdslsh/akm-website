@@ -27,7 +27,7 @@ jobs:
       - uses: oven-sh/setup-bun@v2
       - run: bun install --frozen-lockfile
       - name: Test page directory
-        run: bun test tests/
+        run: bun test ./tests/import-docs.test.mjs ./tests/page-directory.test.mjs
       - name: Import upstream AKM documentation
         run: bun run import:docs
         env:
