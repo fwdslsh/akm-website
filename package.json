@@ -3,9 +3,16 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "import:docs": "bun scripts/import-docs.mjs",
-    "build": "bun run import:docs && unify build --clean",
-    "dev": "unify dev"
+    "build": "unify build --clean",
+    "check": "unify build --dry-run --strict",
+    "audit": "unify audit",
+    "dev": "unify dev",
+    "test": "bun test ./tests"
   },
-  "dependencies": { "@fwdslsh/unify": "0.11.7" }
+  "dependencies": {
+    "@fwdslsh/unify": "0.11.11"
+  },
+  "devDependencies": {
+    "unify-docs-template": "0.2.0"
+  }
 }
