@@ -23,6 +23,6 @@ Template provenance: Unify 0.11.7, `examples/unify-docs` for the layout, masthea
 
 ## Website organization
 
-The importer places contributor testing under `docs/maintainers/testing/`, contributor plans under `docs/maintainers/plans/`, and functional contract patterns under Maintainers. Source docs stay canonical upstream; website links are rewritten and old website URLs redirect to their new location. Pages without an authored H1 receive a descriptive heading so the page directory never uses the shared layout title as its label.
+The documentation hub and Guides index are user focused. Architecture, design internals, and reviews live under Maintainers. The importer places contributor testing under `docs/maintainers/testing/`, contributor plans under `docs/maintainers/plans/`, and functional contract patterns under Maintainers. Source docs stay canonical upstream; website links are rewritten and old website URLs redirect to their new location. Pages without an authored H1 receive a descriptive heading so the page directory never uses the shared layout title as its label.
 
-Run directory behavior checks with `bun test tests/page-directory.test.mjs`.
+Run directory behavior checks with `bun test tests/`.

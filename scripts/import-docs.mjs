@@ -18,6 +18,8 @@ async function inventory(dir, prefix = '') {
 await inventory(source);
 function publishedPath(relative) {
   if (relative.startsWith('architecture/testing/')) return relative.replace('architecture/testing/', 'maintainers/testing/');
+  if (relative === 'architecture/internals/functional-contract-patterns.md') return 'maintainers/functional-contract-patterns.md';
+  if (relative.startsWith('architecture/')) return 'maintainers/' + relative;
   if (relative.startsWith('plans/')) return 'maintainers/' + relative;
   if (relative === 'architecture/internals/functional-contract-patterns.md') return 'maintainers/functional-contract-patterns.md';
   return relative;
@@ -52,7 +54,9 @@ async function visit(dir) {
     if (!entry.name.endsWith('.md')) continue;
     const emitted = path.relative(target, file).split(path.sep).join('/');
     const relative = originals.get(emitted) || emitted;
-    const original = await readFile(file, 'utf8');
+    const original = relative === 'README.md'
+      ? await readFile(new URL('../site-content/docs-index.md', import.meta.url), 'utf8')
+      : await readFile(file, 'utf8');
     function link(url) {
       const github = url.match(/^https:\/\/github\.com\/itlackey\/akm\/blob\/main\/docs\/(.*)$/);
       if (github) return websitePath(github[1]);
@@ -79,8 +83,11 @@ async function visit(dir) {
         || path.basename(relative, '.md').replaceAll('-', ' ');
       content = frontmatter + '# ' + title + '\n\n' + body;
     }
+    if (relative === 'guides/README.md') {
+      content = content.split('\n').filter(line => !/^[-*]\s/.test(line) || !line.includes('/docs/maintainers/')).join('\n');
+    }
     if (relative === 'maintainers/README.md') {
-      content += '\n## Testing and contributor plans\n\n';
+      content += '\n## Architecture and internals\n\n- [Architecture documentation](' + websitePath('architecture/README.md') + ') — Design, internals, specifications, and contributor reviews.\n\n## Testing and contributor plans\n\n';
       for (const candidate of [...files].sort()) {
         if (candidate.startsWith('architecture/testing/') || candidate.startsWith('plans/') || candidate === 'architecture/internals/functional-contract-patterns.md') {
           const title = path.basename(candidate, '.md').replaceAll('-', ' ');

@@ -30,7 +30,7 @@ Use your preferred agent and connect models or integrations when you need them. 
 - [Capture knowledge](/docs/guides/capture-knowledge.html)
 - [Write and run workflows](/docs/guides/author-workflows.html)
 - [Look up CLI commands](/docs/reference/cli.html)
-- [Explore the architecture](/docs/architecture/architecture.html)
+- [Configure AKM](/docs/reference/configuration.html)
 
 ## Built from the source
 
