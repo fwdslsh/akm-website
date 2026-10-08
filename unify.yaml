@@ -1,4 +1,4 @@
 source: site
 output: dist
 catalog: true
-base-url: https://fwdslsh.github.io/akm-website/
+base-url: https://akm.fwdslsh.dev/

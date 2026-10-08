@@ -17,6 +17,6 @@ The importer preserves document paths, rewrites Markdown links to rendered pages
 
 ## Publish
 
-GitHub Actions imports the latest upstream `main` docs and deploys to GitHub Pages on pushes, manual runs, and daily at 06:23 UTC. The default address is https://fwdslsh.github.io/akm-website/. Change `base-url` in `unify.yaml` when using a custom domain.
+GitHub Actions imports the latest upstream `main` docs and deploys to GitHub Pages on pushes, manual runs, and daily at 06:23 UTC. The default address is https://akm.fwdslsh.dev/. GitHub Pages is bound to `akm.fwdslsh.dev`; its Azure DNS CNAME points to `fwdslsh.github.io`. The custom domain is managed in repository Pages settings.
 
 Template provenance: Unify 0.11.7, `examples/unify-docs` for the layout, masthead, sidebar and styling; `templates/docs` for the searchable page directory. Deployment follows Unify’s `.github/workflows/deploy-docs.yml`, adapted for the separate upstream AKM checkout and project Pages address. The workflow runs a dry build before publishing. Strict completeness audit is not enabled: upstream docs currently contain stale heading links and missing descriptions. Unify template code is MPL-2.0; imported AKM content retains its upstream license.

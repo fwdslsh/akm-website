@@ -1,10 +1,10 @@
 ---
-title: AKM — One library for every agent
-description: Discover, load, and improve reusable capabilities for any AI agent with AKM.
+title: AKM — One tool to rule them all
+description: Knowledge, skills, plugins, and workflows for AI agents, backed by local files and SQLite.
 ---
-# One library for every agent
+# One tool to rule them all
 
-AKM is a portable capability library for AI agents. Connect your bundles, discover what a task needs, and load only the relevant knowledge, skills, commands, and workflows.
+AKM brings knowledge, skills, commands, plugins, and workflows into one portable tool for AI agents. Connect your bundles, discover what a task needs, and load only the capabilities that help.
 
 [Get started](/docs/guides/getting-started.html) · [Explore the documentation](/docs/README.html) · [Search all pages](/all-pages.html)
 
@@ -15,6 +15,12 @@ akm curate "your task"
 akm show <ref>
 akm feedback <ref> --positive
 ```
+
+## More capability. Less infrastructure.
+
+Agent harnesses, RAG stacks, and plugin systems often come with a collection of services to install and maintain. AKM brings capability discovery, knowledge retrieval, memory, and workflow orchestration together around your local filesystem and SQLite. Start with files you own and a CLI your agent can call, without running a separate database or retrieval service.
+
+Use your preferred agent and connect models or integrations when you need them. Your library stays portable, readable, and under your control.
 
 ## Find your next step
 

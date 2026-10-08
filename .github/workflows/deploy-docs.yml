@@ -6,7 +6,7 @@ on:
   schedule:
     - cron: '23 6 * * *'
 env:
-  SITE_BASE_URL: https://fwdslsh.github.io/akm-website/
+  SITE_BASE_URL: https://akm.fwdslsh.dev/
 permissions:
   contents: read
   pages: write
