@@ -1,4 +1,11 @@
-source: site
-output: dist
-catalog: true
+# Saved unify flags: only what differs from the defaults.
+# The site's address: sitemap.xml, canonical links and absolute URLs come from it.
 base-url: https://akm.fwdslsh.dev/
+# The page directory (/all-pages.html) reads the catalog.
+catalog: true
+# The docs template this site builds on: its layout, stylesheet and page directory.
+# A directory, so the installed package is the one copy, pinned by bun.lock; this
+# site keeps only its pages and the four files under site/_includes/ that name it.
+extends: node_modules/unify-docs-template
+# Publishes AKM's docs/ into the build (scripts/gen.mjs).
+generate: scripts/gen.mjs

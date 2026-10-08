@@ -26,16 +26,18 @@ jobs:
           path: upstream/akm
       - uses: oven-sh/setup-bun@v2
       - run: bun install --frozen-lockfile
-      - name: Test page directory
-        run: bun test ./tests/import-docs.test.mjs ./tests/page-directory.test.mjs
-      - name: Import upstream AKM documentation
-        run: bun run import:docs
+      - name: Test the generator
+        run: bun test ./tests
+      # unify runs scripts/gen.mjs before each build (generate: in unify.yaml), which
+      # publishes AKM's docs from the checkout above; nothing is imported into site/.
+      - name: Verify build without publishing
+        run: bunx unify build --base-url "$SITE_BASE_URL" --dry-run --strict
         env:
           AKM_DOCS_DIR: upstream/akm/docs
-      - name: Verify build without publishing
-        run: bunx unify build --base-url "$SITE_BASE_URL" --dry-run
       - name: Build documentation
-        run: bunx unify build --base-url "$SITE_BASE_URL" --clean
+        run: bunx unify build --base-url "$SITE_BASE_URL" --clean --strict
+        env:
+          AKM_DOCS_DIR: upstream/akm/docs
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
