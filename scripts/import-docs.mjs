@@ -54,8 +54,9 @@ async function visit(dir) {
     if (!entry.name.endsWith('.md')) continue;
     const emitted = path.relative(target, file).split(path.sep).join('/');
     const relative = originals.get(emitted) || emitted;
-    const original = relative === 'README.md'
-      ? await readFile(new URL('../site-content/docs-index.md', import.meta.url), 'utf8')
+    const overrides = { 'README.md': 'docs-index.md', 'agents/README.md': 'agents-index.md' };
+    const original = overrides[relative]
+      ? await readFile(new URL('../site-content/' + overrides[relative], import.meta.url), 'utf8')
       : await readFile(file, 'utf8');
     function link(url) {
       const github = url.match(/^https:\/\/github\.com\/itlackey\/akm\/blob\/main\/docs\/(.*)$/);
@@ -82,6 +83,18 @@ async function visit(dir) {
         || prose.split('\n').find(line => line.trim() && !/^[-*>]/.test(line.trim()))?.trim()
         || path.basename(relative, '.md').replaceAll('-', ' ');
       content = frontmatter + '# ' + title + '\n\n' + body;
+    }
+    if (relative === 'reference/README.md') {
+      content = content.replace(/^See also:.*$/m, '');
+      content = content.replace('Pointer page: where the bundle-format compatibility table and adapter internals now live', 'Supported bundle formats and compatibility');
+    }
+    if (relative === 'posts/README.md') {
+      content = '# Posts\n\nArticles about using AKM. These describe the version available at publication time; use the guides and reference for current commands.\n\n';
+      for (const candidate of [...files].filter(name => name.startsWith('posts/') && name.endsWith('.md') && name !== relative).sort()) {
+        const article = await readFile(path.join(source, candidate), 'utf8');
+        const title = article.match(/^title:\s*([^\n]+)$/m)?.[1]?.replace(/^['"]|['"]$/g, '') || article.match(/^#\s+(.+)$/m)?.[1] || path.basename(candidate, '.md').replaceAll('-', ' ');
+        content += '- [' + title + '](' + websitePath(candidate) + ')\n';
+      }
     }
     if (relative === 'guides/README.md') {
       content = content.split('\n').filter(line => !/^[-*]\s/.test(line) || !line.includes('/docs/maintainers/')).join('\n');
