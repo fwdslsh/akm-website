@@ -1,10 +1,12 @@
-name: Publish AKM documentation
+name: Deploy docs
 on:
   push:
     branches: [main]
   workflow_dispatch:
   schedule:
     - cron: '23 6 * * *'
+env:
+  SITE_BASE_URL: https://fwdslsh.github.io/akm-website/
 permissions:
   contents: read
   pages: write
@@ -24,9 +26,14 @@ jobs:
           path: upstream/akm
       - uses: oven-sh/setup-bun@v2
       - run: bun install --frozen-lockfile
-      - run: bun run build
+      - name: Import upstream AKM documentation
+        run: bun run import:docs
         env:
           AKM_DOCS_DIR: upstream/akm/docs
+      - name: Verify build without publishing
+        run: bunx unify build --base-url "$SITE_BASE_URL" --dry-run
+      - name: Build documentation
+        run: bunx unify build --base-url "$SITE_BASE_URL" --clean
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
