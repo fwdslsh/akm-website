@@ -3,6 +3,8 @@
 base-url: https://akm.fwdslsh.dev/
 # The page directory (/all-pages.html) reads the catalog.
 catalog: true
+# /docs/guides/getting-started/ rather than .html, as on the other fwdslsh sites
+pretty-urls: true
 # The docs template this site builds on: its layout, stylesheet and page directory.
 # A directory, so the installed package is the one copy, pinned by bun.lock; this
 # site keeps only its pages and the four files under site/_includes/ that name it.

@@ -10,9 +10,9 @@
     "test": "bun test ./tests"
   },
   "dependencies": {
-    "@fwdslsh/unify": "0.11.12"
+    "@fwdslsh/unify": "0.11.13"
   },
   "devDependencies": {
-    "unify-docs-template": "0.3.0"
+    "unify-docs-template": "0.4.0"
   }
 }
