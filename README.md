@@ -9,7 +9,7 @@ This repository holds almost nothing of its own. The site **extends** the `unify
 - `site/index.md`, the front page;
 - the four files that name the site: `site/_includes/head.html` (title suffix, description, fonts), `nav.html` (the masthead), `docnav.html` (the sidebar) and `footer.html`;
 - `site/assets/share-placeholder.png`, the 1200×630 share card;
-- `site-content/`, this site's versions of the two hub pages (`docs/README.md`, `docs/agents/README.md`);
+- `site-content/`, this site's own versions of the two hub pages (`docs-index.md` and `agents-index.md`, published in place of `docs/README.md` and `docs/agents/README.md`);
 - `scripts/gen.mjs`, which unify runs before every build (`generate:` in `unify.yaml`).
 
 `scripts/gen.mjs` publishes AKM's `docs/` through the template's importer: every document lands at `docs/<its path>`, a missing title or description is filled in from the document, and a link leaving the folder goes to GitHub. Nothing is copied into this repository. What the script decides for itself: contributor material (`architecture/`, `plans/`, the testing docs) is published under `docs/maintainers/`, and each moved page's old address redirects to the new one; a few upstream pages get small patches (see `transform` in the script).
