@@ -4,7 +4,7 @@ The source of <https://akm.fwdslsh.dev/>: AKM's own documentation from [itlackey
 
 ## How it is put together
 
-This repository holds almost nothing of its own. The site **extends** the `unify-docs-template` package (`extends: node_modules/unify-docs-template` in `unify.yaml`): the layout, the stylesheet, the page directory at `/all-pages.html` and the 404 page are the template's, installed as a dev dependency and pinned by `bun.lock`. What is this site's own:
+This repository holds almost nothing of its own. The site **extends** the `unify-docs-template` package (`extends: node_modules/unify-docs-template` in `unify.yaml`): the layout, the stylesheet, the page directory at `/all-pages/` and the 404 page are the template's, installed as a dev dependency and pinned by `bun.lock`. What is this site's own:
 
 - `site/index.html`, the front page, laid out like the other fwdslsh docs sites' (hero, cards, next steps);
 - the four files that name the site: `site/_includes/head.html` (title suffix, description, fonts), `nav.html` (the masthead), `docnav.html` (the sidebar) and `footer.html`;
